@@ -30,11 +30,16 @@ export class Wallet{
 
     compterStock(){
         let total = 0;
-        for (let i = 0 ; i < this.stock.length ; i++)
-        {
-            total += this.stock[i].montant;
+        if (this.stock.length != 0){
+            for (let i = 0 ; i < this.stock.length ; i++){
+                if(this.stock[i].montant)
+                total += this.stock[i].montant;
+            }
+            return total;
         }
-        return total.toFixed(2);
+        else {
+            return 0;
+        }
     }
 
 }

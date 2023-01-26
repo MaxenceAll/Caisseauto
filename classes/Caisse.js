@@ -131,9 +131,14 @@ export class Caisse{
             this.restantapayerLabel.classList.add("rouge","blink_me");
 
             //vider montant inséré vers fond caisse
-            for (let i = 0 ; i < this.entreeMonnaie.stock.length + 1 ; i++){
-                this.fondCaisse.stock.push(this.entreeMonnaie.stock[i]);
-                this.entreeMonnaie.stock.shift();
+            // for (let i = 0 ; i < this.entreeMonnaie.stock.length + 1 ; i++){
+            //     this.fondCaisse.stock.push(this.entreeMonnaie.stock[i]);
+            //     this.entreeMonnaie.stock.shift();
+            // }
+            if(this.entreeMonnaie.stock.length){
+                for (let i = 0 ; i < this.entreeMonnaie.stock.length ; i++){
+                    this.fondCaisse.stock.push(this.entreeMonnaie.stock.pop());
+                }
             }
 
             //déduire reste à payer
@@ -159,9 +164,10 @@ export class Caisse{
                 // passerResteAPayerEnVert();
                 this.restantapayerLabel.classList.add("vert","blink_me");
                 //vider montant inséré vers fond caisse
-                for (let i = 0 ; i < this.entreeMonnaie.stock.length + 1 ; i++){
-                    this.fondCaisse.stock.push(this.entreeMonnaie.stock[i]);
-                    this.entreeMonnaie.stock.shift();
+                if(this.entreeMonnaie.stock.length){
+                    for (let i = 0 ; i < this.entreeMonnaie.stock.length ; i++){
+                        this.fondCaisse.stock.push(this.entreeMonnaie.stock.pop());
+                    }
                 }                
                 //déduire reste à payer
                 this.restantapayer -= this.entreeMonnaie.montant_total.innerText;
@@ -169,7 +175,7 @@ export class Caisse{
                 //maj montant inséré
                 this.entreeMonnaie.montant_total.innerText = this.entreeMonnaie.compterStock();
                 // maj du fond de caisse
-                this.fond_caisseLabel.innerText = this.fondCaisse.compterStock();
+                this.fond_caisseLabel.innerText = parseFloat(this.fondCaisse.compterStock());
 
 
                 // alert("Trop percu, retour monnaie nécessaire");
@@ -261,7 +267,7 @@ export class Caisse{
 
     }
 
-    
+
  
     getFondCaisse(){
         this.fondCaisse.compterStock();
