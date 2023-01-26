@@ -190,74 +190,26 @@ export class Caisse{
                 console.log(this.aRendre);
 
 
-                let b50e=0; let b20e=0; let b10e=0;
-                let b5e=0;  let p2e=0;  let p1e=0;
-                let p50c=0; let p20c=0; let p10c=0;
-                let p5c=0;  let p2c=0;  let p1c=0;
-                while (this.aRendre > 0)
-                {
-                    while (this.aRendre >= 50)
-                    {
-                        this.aRendre -= 50; b50e++; this.aRendre=this.aRendre.toFixed(2);
-                        this.aRendreAffichage.innerHTML += "<span><input class='button billet billet50' type='button' value='50€'></span>";
-                    }
-                    while (this.aRendre >= 20)
-                    {
-                        this.aRendre -= 20; b20e++;this.aRendre=this.aRendre.toFixed(2);
-                        this.aRendreAffichage.innerHTML += "<span><input class='button billet billet20' type='button' value='20€'></span>";
-                    }
-                    while (this.aRendre >= 10)
-                    {
-                        this.aRendre -= 10; b10e++;this.aRendre=this.aRendre.toFixed(2);
-                        this.aRendreAffichage.innerHTML += "<span><input class='button billet  billet10' type='button' value='10€'></span>";
-                    }
-                    while (this.aRendre >= 5)
-                    {
-                        this.aRendre -= 5; b5e++;this.aRendre=this.aRendre.toFixed(2);
-                        this.aRendreAffichage.innerHTML += "<span><input class='button billet billet5' type='button' value='5€'></span>";
-                    }
-                    while (this.aRendre >= 2)
-                    {
-                        this.aRendre -= 2; p2e++;this.aRendre=this.aRendre.toFixed(2);
-                        this.aRendreAffichage.innerHTML += "<span><input class='button piece piece2e' type='button' value='2€'></span>";
-                    }
-                    while (this.aRendre >= 1)
-                    {
-                        this.aRendre -= 1; p1e++;this.aRendre=this.aRendre.toFixed(2);
-                        this.aRendreAffichage.innerHTML += "<span><input class='button piece piece1e' type='button' value='1€'></span>";
-                    }
-                    while (this.aRendre >= 0.50)
-                    {
-                        this.aRendre -= 0.50; p50c++;this.aRendre=this.aRendre.toFixed(2);
-                        this.aRendreAffichage.innerHTML += "<span><input class='button piece piece50c' type='button' value='50c'></span>";
-                    }
-                    while (this.aRendre >= 0.20)
-                    {
-                        this.aRendre -= 0.20; p20c++;this.aRendre=this.aRendre.toFixed(2);
-                        this.aRendreAffichage.innerHTML += "<span><input class='button piece piece20c' type='button' value='20c'></span>";
-                    }
-                    while (this.aRendre >= 0.10)
-                    {
-                        this.aRendre -= 0.10; p10c++;this.aRendre=this.aRendre.toFixed(2);
-                        this.aRendreAffichage.innerHTML += "<span><input class='button piece piece10c' type='button' value='10c'></span>";
-                    }
-                    while (this.aRendre >= 0.05)
-                    {
-                        this.aRendre -= 0.05; p5c++;this.aRendre=this.aRendre.toFixed(2);
-                        this.aRendreAffichage.innerHTML += "<span><input class='button piece piece5c' type='button' value='5c'></span>";
-                    }
-                    while (this.aRendre >= 0.02)
-                    {
-                        this.aRendre -= 0.02; p2c++;this.aRendre=this.aRendre.toFixed(2);
-                        this.aRendreAffichage.innerHTML += "<span><input class='button piece piece2c' type='button' value='2c'></span>";
-                    }
-                    while (this.aRendre >= 0.01)
-                    {
-                        this.aRendre -= 0.01; p1c++;this.aRendre=this.aRendre.toFixed(2);
-                        this.aRendreAffichage.innerHTML += "<span><input class='button piece piece1c' type='button' value='1c'></span>";
-                    }                    
-                }                
+                const currencyValues = [50, 20, 10, 5, 2, 1, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01];
+                const currencyTypes = ["billet50", "billet20", "billet10", "billet5", "piece2e", "piece1e", "piece50c", "piece20c", "piece10c", "piece5c", "piece2c", "piece1c"];
+                let change = {};
 
+                for (let i = 0; i < currencyValues.length; i++)
+                {
+                    while (this.aRendre >= currencyValues[i]) 
+                        {
+                            this.aRendre -= currencyValues[i];
+                            this.aRendre = this.aRendre.toFixed(2);
+                            if (change[currencyTypes[i]])
+                            {
+                                change[currencyTypes[i]]++;
+                            } else
+                            {
+                                change[currencyTypes[i]] = 1;
+                            }
+                            this.aRendreAffichage.innerHTML += `<span><input class='button ${currencyTypes[i]}' type='button' value='${currencyValues[i]}€'></span>`;
+                        }
+                }
             }
         }
     }
