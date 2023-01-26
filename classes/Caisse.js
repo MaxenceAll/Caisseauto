@@ -148,7 +148,8 @@ export class Caisse{
         this.fond_caisseLabel.innerText = parseFloat(this.fondCaisse.compterStock());
     }
 
-    calculerRenduMonnaie(){        
+    calculerRenduMonnaie()
+    {        
         const currencyValues = [50, 20, 10, 5, 2, 1, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01];
         const currencyTypes = ["billet50", "billet20", "billet10", "billet5", "piece2e",
              "piece1e", "piece50c", "piece20c", "piece10c", "piece5c", "piece2c", "piece1c"];
@@ -173,11 +174,24 @@ export class Caisse{
         }
     }
 
-
- 
     getFondCaisse(){
         this.fondCaisse.compterStock();
     }
+
+    change(value) {
+        // Find the appropriate Monnaie object in fondCaisse.stock
+        let monnaieToWithdraw = this.fondCaisse.stock.find(monnaie => monnaie.value === value);
+    
+        // Check if the Monnaie object exists in fondCaisse.stock
+        if (monnaieToWithdraw) {
+          // Remove the Monnaie object from fondCaisse.stock
+          this.fondCaisse.stock = this.fondCaisse.stock.filter(monnaie => monnaie !== monnaieToWithdraw);
+    
+          // Add the Monnaie object to retourMonnaie.stock
+          this.retourMonnaie.stock.push(monnaieToWithdraw);
+        }
+      }
+
     // TOOLS
     getRandomPrice = (min, max) => {
         return +(Math.random() * (max - min) + min).toFixed(2);
