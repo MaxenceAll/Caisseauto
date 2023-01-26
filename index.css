@@ -17,6 +17,7 @@ hr{
     top: 0;
 } */
 
+
 .bigcontainer{
     padding: 10px;
     border: 20px solid #003d52;
@@ -85,6 +86,21 @@ hr{
     cursor: pointer;
 }
 
+#btn_next{
+    border-radius: 10%;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 2rem;
+    color: white;
+    background-color: rgb(255, 166, 0);
+}
+#btn_next:hover{
+    font-size: 2rem;
+    color: rgb(255, 166, 0);
+    background-color: white;
+    cursor: pointer;
+}
+
+
 
 .label_choix_billets{
     font-size: 2rem;
@@ -141,7 +157,7 @@ hr{
     font-size: 3.5vw;
     width: 4rem;
 }
- .piece2{
+ .piece02{
     border-radius: 50%;  
     background-color: yellow;
     border: 6px solid gray;
@@ -149,7 +165,7 @@ hr{
     width: 3.5rem;
     height: 3.5rem;
 }
- .piece1{
+ .piece01{
     border-radius: 50%;  
     background-color: gray;
     border: 6px solid yellow;
@@ -259,6 +275,21 @@ hr{
   @keyframes blinker {  
     50% { opacity: 0; }
   }
+
+
+
+
+.animated{
+    animation: toto 1s linear;
+    position: relative;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes toto {
+    0%   {left:-500px; top:0px;}
+    100% {left: 0px; top:0px;}
+  }
+
 
 
 

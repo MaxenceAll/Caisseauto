@@ -157,7 +157,7 @@ export class Caisse{
         this.fond_caisseLabel.innerText = parseFloat(this.fondCaisse.compterStock());
     }
 
-    calculerRenduMonnaie()
+    async calculerRenduMonnaie()
     {        
         // const currencyValues = [50, 20, 10, 5, 2, 1, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01];
         // const currencyTypes = ["billet50", "billet20", "billet10", "billet5", "piece2e",
@@ -194,23 +194,28 @@ export class Caisse{
                 this.transfert_fond_caisse_vers_retour_monnaie(this.fondCaisse.stock, this.retourMonnaie.stock, billet);
                 aRendre -= montant;
 
-                switch (billet.nom) {
-                    case '50c':                        
-                        break;
-                
-                    default:
-                        break;
-                }
-
+          
 
                 if (billet.nom == '50c' || billet.nom == '20c' || billet.nom == '10c'|| billet.nom == '5c'  || billet.nom == '2c'  || billet.nom == '1c'){
-                    this.aRendreAffichage.innerHTML += `<span><input class='button ${billet.type} ${billet.type}${(billet.montant)*100}' type='button' value='${(billet.montant)*100}€'></span>`;
+                    this.aRendreAffichage.innerHTML += `<span><input class='button ${billet.type} ${billet.type}${(billet.montant)*100} animated' type='button' value='${(billet.montant)*100}c'></span>`;
+                    // await new Promise(r => setTimeout(r, 1000));
                 }
                 else{
-                    this.aRendreAffichage.innerHTML += `<span><input class='button ${billet.type} ${billet.type}${billet.montant}' type='button' value='${billet.montant}€'></span>`;                    
+                    if (billet.nom == '1€' || billet.nom == '2€')
+                    {
+                        this.aRendreAffichage.innerHTML += `<span><input class='button ${billet.type} ${billet.type}0${billet.montant}  animated' type='button' value='${billet.montant}€'></span>`;                    
+                        // await new Promise(r => setTimeout(r, 1000));
+                    }
+                    else
+                    {
+                        this.aRendreAffichage.innerHTML += `<span><input class='button ${billet.type} ${billet.type}${billet.montant}  animated' type='button' value='${billet.montant}€'></span>`;                    
+                        // await new Promise(r => setTimeout(r, 1000));
+                    }
                 }
-            }
+            }            
         }
+        
+
 
 
         
