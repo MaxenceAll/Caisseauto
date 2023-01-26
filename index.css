@@ -1,0 +1,276 @@
+html , body{
+    padding: 0px;
+    margin: 0px;
+    color: black;
+    font-family: 'Monofett', cursive;
+}
+
+hr{
+    align-items: center;
+    width: 80%;
+    margin: auto;
+}
+
+/* .scrolling{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+} */
+
+.bigcontainer{
+    padding: 10px;
+    border: 20px solid #003d52;
+    background-color: grey;
+}
+
+.affichage_montants{    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: lightgray;
+    border: 4px solid rgb(3, 3, 3);
+    width: 100%;
+    font-size: 3rem;
+    border-radius: 10%;
+}
+
+/* .affichage_montant_total{
+    border-bottom: 3px solid rgb(3, 3, 3);
+} */
+
+.affichage_fond_caisse{
+    font-size: 1.2rem;
+}
+
+.boutons{   
+    margin-top: 1%;
+    margin-bottom: 1%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+.boutons input{
+    margin: 5px;
+}
+
+#btn_scan{
+    border-radius: 10%;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 2rem;
+    color: white;
+    background-color: green;
+}
+#btn_scan:hover{    
+    font-size: 2rem;
+    color: green;
+    background-color: white;
+    cursor: pointer;
+}
+#btn_payer{
+    border-radius: 10%;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 2rem;
+    color: white;
+    background-color: blue;
+}
+#btn_payer:hover{
+    font-size: 2rem;
+    color: blue;
+    background-color: white;
+    cursor: pointer;
+}
+
+
+.label_choix_billets{
+    font-size: 2rem;
+    text-decoration: underline;
+    padding-bottom: 5px;
+}
+.monnaies{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    background-color: lightgray;
+    border: 4px solid rgb(3, 3, 3);
+    width: auto;
+    border-radius: 10%;
+    padding: 5px;
+}
+.aRendreAffichage{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    background-color: lightgray;
+    border: 4px solid rgb(3, 3, 3);
+    width: auto;
+    border-radius: 10%;
+    padding: 5px;
+}
+
+.monnaies input:hover{
+    background-color: black; 
+    color:white;   
+    cursor: pointer;
+    border: outset;
+}
+
+/* Affichage des monnaies : */
+ .billet50{
+    background-color: violet;
+    font-size: 3.5vw;
+    width: 4rem;
+}
+ .billet20{
+    background-color: lightblue;
+    font-size: 3.5vw;
+    width: 4rem;
+}
+ .billet10{
+    background-color: burlywood;
+    font-size: 3.5vw;
+    width:4rem;
+}
+ .billet5{
+    background-color: greenyellow;
+    font-size: 3.5vw;
+    width: 4rem;
+}
+ .piece2e{
+    border-radius: 50%;  
+    background-color: yellow;
+    border: 6px solid gray;
+    font-size: 1.5rem;
+    width: 3.5rem;
+    height: 3.5rem;
+}
+ .piece1e{
+    border-radius: 50%;  
+    background-color: gray;
+    border: 6px solid yellow;
+    font-size: 1.5rem;
+    width: 3rem;
+    height: 3rem;
+}
+ .piece50c{
+    border-radius: 50%;  
+    background-color: yellow;
+    border: 2px white dashed;
+    font-size: 1.1rem;
+    width: 2.5rem;
+    height: 2.5rem;
+}
+ .piece20c{
+    border-radius: 50%;  
+    background-color: yellow;
+    border: 1px white dashed;
+    font-size: 1rem;
+    width: 2.2rem;
+    height: 2.2rem;
+}
+ .piece10c{
+    border-radius: 50%;  
+    background-color: yellow;
+    border: 1px white dashed;
+    font-size: 1rem;
+    width: 2.1rem;
+    height: 2.1rem;
+}
+ .piece5c{
+    border-radius: 50%;  
+    background-color: burlywood;
+    border: 1px white dashed;
+    font-size: 0.9rem;
+    width: 2rem;
+    height: 2rem;
+}
+ .piece2c{
+    border-radius: 50%;  
+    background-color: burlywood;
+    border: 1px white dashed;
+    font-size: 0.8rem;
+    width: 1.9rem;
+    height: 1.9rem;
+}
+ .piece1c{
+    border-radius: 50%;  
+    background-color: burlywood;
+    border: 1px white dashed;
+    font-size: 0.7rem;
+    width: 1.7rem;
+    height: 1.7rem;
+}
+
+
+
+.affichage_retour_ticket{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin-top: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: lightgray;
+    border: 4px solid black;
+    width: auto;
+}
+
+.label_retour_monnaie{
+    text-decoration: underline;
+    font-size: 3.5vw;
+    padding-bottom: 15px;
+}
+.label_ticket_caisse{
+    text-decoration: underline;
+    font-size: 3.5vw;
+    padding-bottom: 15px;    
+}
+
+.ticket_caisse{
+    background-color: white;
+    padding: 15px;
+    border-left: 15px solid pink;
+    border-right: 15px solid pink;
+}
+
+
+.rouge{
+    color:red;
+}
+.vert{
+    color: green;
+}
+.fondRouge{
+    background-color: rgba(255, 0, 0, 0.233);
+}
+.fondJaune{
+    background-color: rgba(255, 255, 0, 0.233);
+}
+
+
+.blink_me {
+    animation: blinker 1s linear infinite;
+  }
+  
+  @keyframes blinker {  
+    50% { opacity: 0; }
+  }
+
+
+
+
+footer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    height: 50px;
+    background-color: grey;
+    font-size: 2rem;
+}

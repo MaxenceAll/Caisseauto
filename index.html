@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Monofett&display=swap');
+    </style>
+
+    <title>Caisse automatique !</title>
+</head>
+<body>
+    <main>
+        <!-- Debut big container -->
+        <div class="bigcontainer">
+            <section class="scrolling">
+                <!-- Debut Affichages -->
+                <section class="affichage_montants">
+
+                    <div class="affichage_montant_total">
+                        <div>
+                            Montant inséré :
+                        </div>
+                        <hr>
+                        <div>
+                            <span id="montant_total">0</span><span>  €</span>
+                        </div>
+                    </div>
+                    <div class="affichage_montant_resteapayer">
+                        <div id="ResteA">
+                            Reste à payer :
+                        </div>
+                        <hr>
+                        <span class="montant_restantapayer">
+                            <div>
+                                <span id="restantapayer">0</span><span>  €</span>
+                            </div>
+                        </span>
+                    </div>    
+                    
+                    <hr>
+                    <div class="affichage_fond_caisse">
+                        <div>
+                            Fond de caisse : <span id="fond_caisse">0</span><span>  €</span>
+                        </div>
+                    </div>
+
+                </section>
+                <!-- Fin Affichages -->
+
+                <!-- Debut boutons scan/payer -->
+                <section class="boutons">
+                    <div>
+                        <input id="btn_scan" class="button" type="button" value="Scanner un article">
+                    </div>
+                    <div>
+                        <input id="btn_payer" class="button" type="button" value="Fin client">
+                    </div>
+                </section>
+                <!-- Fin boutons scan/payer -->
+
+                <!-- Debut choix des billets -->
+                <section class="monnaies">
+                    <div class="label_choix_billets"> 
+                        Insértion de monnaie :
+                    </div>
+                    <div>
+                        <input id="50"  class="button billet argent billet50"   type="button" value="50€">
+                        <input id="20"  class="button billet argent billet20"   type="button" value="20€">
+                        <input id="10"  class="button billet argent billet10"   type="button" value="10€">
+                        <input id="5"   class="button billet argent billet5"   type="button" value="5€">
+                        <input id="2"   class="button piece argent piece2e"    type="button" value="2€">
+                        <input id="1"   class="button piece argent piece1e"    type="button" value="1€">
+                        <input id="0.50" class="button centimeH argent piece50c" type="button" value="50c">
+                        <input id="0.20" class="button centimeH argent piece20c" type="button" value="20c">
+                        <input id="0.10" class="button centimeH argent piece10c" type="button" value="10c">
+                        <input id="0.05"  class="button centimeB argent piece5c" type="button" value="5c">
+                        <input id="0.02"  class="button centimeB argent piece2c" type="button" value="2c">
+                        <input id="0.01"  class="button centimeB argent piece1c" type="button" value="1c">
+                        <input id="btn_test"  class="" type="button" value="Test">
+                    </div>
+                </section>
+                <!-- Fin choix des billets -->
+            </section>
+            
+
+            <!-- Debut affichage bas -->
+            <section class="affichage_retour_ticket">
+
+                <div class="retour_monnaie">
+                    <p class="label_retour_monnaie">
+                        Retour monnaies :
+                    </p>
+                    <p>- à rendre : <span id="aRendre">0</span>€</p>
+                    <!-- <p><input class="button billet" type="button" value="50 €"></p> -->
+                    <div id="aRendreAffichage">
+                        <!-- ajout de ce qui est a rendre -->
+                    </div>
+                </div>
+
+                <article class="ticket_caisse">
+                <div>
+                    <p class="label_ticket_caisse">
+                        Ticket de caisse :
+                    </p>
+                    <p>- Total : <span id="total_article">0</span>€</p>
+                    <p>- Nombre article : <span id="nombre_article">0</span> </p>
+                    <div id="tab_articles">
+                        <!-- ajout article dans ticket caisse -->
+                    </div>
+                </div>
+                </article>
+
+            </section>
+            <!-- Fin affichage bas -->
+
+        </div> 
+        <!-- Fin Big container -->
+    </main>
+
+    <footer>
+        <div>
+            Caisse automatique CDA 2023 ©
+        </div>
+    </footer>
+
+    <script src="index.js" type="module"></script>
+    
+</body>
+</html>
