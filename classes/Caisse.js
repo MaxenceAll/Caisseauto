@@ -132,9 +132,8 @@ export class Caisse{
 
     transfert_entreeMonnaie_vers_fond_caisse(){
         if(this.entreeMonnaie.stock.length){
-            for (let i = 0 ; i < this.entreeMonnaie.stock.length ; i++)
-            {
-                this.fondCaisse.stock.push(this.entreeMonnaie.stock.pop());
+            while (this.entreeMonnaie.stock.length) {
+                this.fondCaisse.stock.push(this.entreeMonnaie.stock.shift());
             }
         }
         //changement affichage.
@@ -194,7 +193,22 @@ export class Caisse{
                 let billet = this.fondCaisse.stock.find(s => s.montant === montant);
                 this.transfert_fond_caisse_vers_retour_monnaie(this.fondCaisse.stock, this.retourMonnaie.stock, billet);
                 aRendre -= montant;
-                this.aRendreAffichage.innerHTML += `<span><input class='button ${billet.type} ${billet.type}${billet.montant}' type='button' value='${billet.montant}€'></span>`;
+
+                switch (billet.nom) {
+                    case '50c':                        
+                        break;
+                
+                    default:
+                        break;
+                }
+
+
+                if (billet.nom == '50c' || billet.nom == '20c' || billet.nom == '10c'|| billet.nom == '5c'  || billet.nom == '2c'  || billet.nom == '1c'){
+                    this.aRendreAffichage.innerHTML += `<span><input class='button ${billet.type} ${billet.type}${(billet.montant)*100}' type='button' value='${(billet.montant)*100}€'></span>`;
+                }
+                else{
+                    this.aRendreAffichage.innerHTML += `<span><input class='button ${billet.type} ${billet.type}${billet.montant}' type='button' value='${billet.montant}€'></span>`;                    
+                }
             }
         }
 

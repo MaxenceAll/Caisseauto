@@ -141,7 +141,7 @@ hr{
     font-size: 3.5vw;
     width: 4rem;
 }
- .piece2e{
+ .piece2{
     border-radius: 50%;  
     background-color: yellow;
     border: 6px solid gray;
@@ -149,7 +149,7 @@ hr{
     width: 3.5rem;
     height: 3.5rem;
 }
- .piece1e{
+ .piece1{
     border-radius: 50%;  
     background-color: gray;
     border: 6px solid yellow;
