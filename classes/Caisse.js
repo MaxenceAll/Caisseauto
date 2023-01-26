@@ -183,154 +183,168 @@ export class Caisse{
         //         }
         // }
 
-        let stockFondCaisse = this.fondCaisse.compterStock();
-        let stockRetourMonnaie = this.retourMonnaie.compterStock();
-        
+        // let stockFondCaisse = this.fondCaisse.compterStock();
+        // let stockRetourMonnaie = this.retourMonnaie.compterStock();
+
         let aRendre = this.aRendre;
-        // rendu billets 50
-        while ( aRendre > 50  && (this.fondCaisse.stock.find(s => s.montant === 50)) != undefined )
-        {            
-            let billet50 = this.fondCaisse.stock.find(s => s.montant === 50)
-            if ( billet50 != undefined){
-                //billet 50 dispo
-                this.transfert_fond_caisse_vers_retour_monnaie(this.fondCaisse.stock, this.retourMonnaie.stock, billet50);
-                aRendre-=50;
-                //Ajout affichage.
-                this.aRendreAffichage.innerHTML += `<span><input class='button ${billet50.type} ${billet50.type}${billet50.montant}' type='button' value='${billet50.montant}€'></span>`;
+        let montants = [50, 20, 10, 5, 2, 1, 0.50, 0.20, 0.10, 0.05, 0.02, 0.01];
+        
+        for (let montant of montants) {
+            while (aRendre >= montant && this.fondCaisse.stock.find(s => s.montant === montant) !== undefined) {
+                let billet = this.fondCaisse.stock.find(s => s.montant === montant);
+                this.transfert_fond_caisse_vers_retour_monnaie(this.fondCaisse.stock, this.retourMonnaie.stock, billet);
+                aRendre -= montant;
+                this.aRendreAffichage.innerHTML += `<span><input class='button ${billet.type} ${billet.type}${billet.montant}' type='button' value='${billet.montant}€'></span>`;
             }
         }
-        // rendu billets 20
-        while ( aRendre > 20  && (this.fondCaisse.stock.find(s => s.montant === 20)) != undefined )
-        {
-            let billet20 = this.fondCaisse.stock.find(s => s.montant === 20)
-            if ( billet20 != undefined){
-                //billet 20 dispo
-                this.transfert_fond_caisse_vers_retour_monnaie(this.fondCaisse.stock, this.retourMonnaie.stock, billet20);
-                aRendre-=20;
-                //Ajout affichage.
-                this.aRendreAffichage.innerHTML += `<span><input class='button ${billet20.type} ${billet20.type}${billet20.montant}' type='button' value='${billet20.montant}€'></span>`;
-            }
-        }
-        // rendu billets 10
-        while ( aRendre > 10  && (this.fondCaisse.stock.find(s => s.montant === 10)) != undefined )
-        {
-            let billet10 = this.fondCaisse.stock.find(s => s.montant === 10)
-            if ( billet10 != undefined){
-                //billet 10 dispo
-                this.transfert_fond_caisse_vers_retour_monnaie(this.fondCaisse.stock, this.retourMonnaie.stock, billet10);
-                aRendre-=10;
-                //Ajout affichage.
-                this.aRendreAffichage.innerHTML += `<span><input class='button ${billet10.type} ${billet10.type}${billet10.montant}' type='button' value='${billet10.montant}€'></span>`;
-            }
-        }
-        // rendu billets 5
-        while ( aRendre > 5   && (this.fondCaisse.stock.find(s => s.montant === 5)) != undefined )
-        {
-            let billet5 = this.fondCaisse.stock.find(s => s.montant === 5)
-            if ( billet5 != undefined){
-                //billet 5 dispo
-                this.transfert_fond_caisse_vers_retour_monnaie(this.fondCaisse.stock, this.retourMonnaie.stock, billet5);
-                aRendre-=5;
-                //Ajout affichage.
-                this.aRendreAffichage.innerHTML += `<span><input class='button ${billet5.type} ${billet5.type}${billet5.montant}' type='button' value='${billet5.montant}€'></span>`;
-            }
-        }
-        // rendu piece 2
-        while ( aRendre > 2   && (this.fondCaisse.stock.find(s => s.montant === 2)) != undefined )
-        {
-            let piece2 = this.fondCaisse.stock.find(s => s.montant === 2)
-            if ( piece2 != undefined){
-                //piece2  dispo
-                this.transfert_fond_caisse_vers_retour_monnaie(this.fondCaisse.stock, this.retourMonnaie.stock, piece2);
-                aRendre-=2;
-                //Ajout affichage.
-                this.aRendreAffichage.innerHTML += `<span><input class='button ${piece2.type} ${piece2.type}${piece2.montant}e' type='button' value='${piece2.montant}€'></span>`;
-            }
-        }
-        // rendu piece 1
-        while ( aRendre > 1   && (this.fondCaisse.stock.find(s => s.montant === 1)) != undefined )
-        {
-            let piece1 = this.fondCaisse.stock.find(s => s.montant === 1)
-            if ( piece1 != undefined){
-                //piece1  dispo
-                this.transfert_fond_caisse_vers_retour_monnaie(this.fondCaisse.stock, this.retourMonnaie.stock, piece1);
-                aRendre-=1;
-                //Ajout affichage.
-                this.aRendreAffichage.innerHTML += `<span><input class='button ${piece1.type} ${piece1.type}${piece1.montant}e' type='button' value='${piece1.montant}€'></span>`;
-            }
-        }
-        // rendu piece 50
-        while ( aRendre > 0.5   && (this.fondCaisse.stock.find(s => s.montant === 0.50)) != undefined )
-        {
-            let piece50 = this.fondCaisse.stock.find(s => s.montant === 0.50)
-            if ( piece50 != undefined){
-                //piece50  dispo
-                this.transfert_fond_caisse_vers_retour_monnaie(this.fondCaisse.stock, this.retourMonnaie.stock, piece50);
-                aRendre-=0.5;
-                //Ajout affichage.
-                this.aRendreAffichage.innerHTML += `<span><input class='button ${piece50.type} piece50c' type='button' value='50c'></span>`;
-            }
-        }
-        // rendu piece 20
-        while ( aRendre > 0.20   && (this.fondCaisse.stock.find(s => s.montant === 0.20)) != undefined )
-        {
-            let piece20 = this.fondCaisse.stock.find(s => s.montant === 0.20)
-            if ( piece20 != undefined){
-                //piece20  dispo
-                this.transfert_fond_caisse_vers_retour_monnaie(this.fondCaisse.stock, this.retourMonnaie.stock, piece20);
-                aRendre-=0.20;
-                //Ajout affichage.
-                this.aRendreAffichage.innerHTML += `<span><input class='button ${piece20.type} piece20c' type='button' value='20c'></span>`;
-            }
-        }
-        // rendu piece 10
-        while ( aRendre > 0.10   && (this.fondCaisse.stock.find(s => s.montant === 0.10)) != undefined )
-        {
-            let piece10 = this.fondCaisse.stock.find(s => s.montant === 0.10)
-            if ( piece10 != undefined){
-                //piece10  dispo
-                this.transfert_fond_caisse_vers_retour_monnaie(this.fondCaisse.stock, this.retourMonnaie.stock, piece10);
-                aRendre-=0.10;
-                //Ajout affichage.
-                this.aRendreAffichage.innerHTML += `<span><input class='button ${piece10.type} piece10c' type='button' value='10c'></span>`;
-            }
-        }
-        // rendu piece 5
-        while ( aRendre > 0.05   && (this.fondCaisse.stock.find(s => s.montant === 0.05)) != undefined )
-        {
-            let piece5 = this.fondCaisse.stock.find(s => s.montant === 0.05)
-            if ( piece5 != undefined){
-                //piece5  dispo
-                this.transfert_fond_caisse_vers_retour_monnaie(this.fondCaisse.stock, this.retourMonnaie.stock, piece5);
-                aRendre-=0.05;
-                //Ajout affichage.
-                this.aRendreAffichage.innerHTML += `<span><input class='button ${piece5.type} piece5c' type='button' value='5c'></span>`;
-            }
-        }
-        // rendu piece 2
-        while ( aRendre > 0.02   && (this.fondCaisse.stock.find(s => s.montant === 0.02)) != undefined )
-        {
-            let piece2 = this.fondCaisse.stock.find(s => s.montant === 0.02)
-            if ( piece2 != undefined){
-                //piece5  dispo
-                this.transfert_fond_caisse_vers_retour_monnaie(this.fondCaisse.stock, this.retourMonnaie.stock, piece2);
-                aRendre-=0.02;
-                //Ajout affichage.
-                this.aRendreAffichage.innerHTML += `<span><input class='button ${piece2.type} piece2c' type='button' value='2c'></span>`;
-            }
-        }
-        // rendu piece 1
-        while ( aRendre > 0.01   && (this.fondCaisse.stock.find(s => s.montant === 0.01)) != undefined )
-        {
-            let piece1 = this.fondCaisse.stock.find(s => s.montant === 0.01)
-            if ( piece1 != undefined){
-                //piece5  dispo
-                this.transfert_fond_caisse_vers_retour_monnaie(this.fondCaisse.stock, this.retourMonnaie.stock, piece1);
-                aRendre-=0.01;
-                //Ajout affichage.
-                this.aRendreAffichage.innerHTML += `<span><input class='button ${piece1.type} piece1c' type='button' value='1c'></span>`;                
-            }
-        }
+
+
+        
+        // let aRendre = this.aRendre;
+        // // rendu billets 50
+        // while ( aRendre > 50  && (this.fondCaisse.stock.find(s => s.montant === 50)) != undefined )
+        // {            
+        //     let billet50 = this.fondCaisse.stock.find(s => s.montant === 50)
+        //     if ( billet50 != undefined){
+        //         //billet 50 dispo
+        //         this.transfert_fond_caisse_vers_retour_monnaie(this.fondCaisse.stock, this.retourMonnaie.stock, billet50);
+        //         aRendre-=50;
+        //         //Ajout affichage.
+        //         this.aRendreAffichage.innerHTML += `<span><input class='button ${billet50.type} ${billet50.type}${billet50.montant}' type='button' value='${billet50.montant}€'></span>`;
+        //     }
+        // }
+        // // rendu billets 20
+        // while ( aRendre > 20  && (this.fondCaisse.stock.find(s => s.montant === 20)) != undefined )
+        // {
+        //     let billet20 = this.fondCaisse.stock.find(s => s.montant === 20)
+        //     if ( billet20 != undefined){
+        //         //billet 20 dispo
+        //         this.transfert_fond_caisse_vers_retour_monnaie(this.fondCaisse.stock, this.retourMonnaie.stock, billet20);
+        //         aRendre-=20;
+        //         //Ajout affichage.
+        //         this.aRendreAffichage.innerHTML += `<span><input class='button ${billet20.type} ${billet20.type}${billet20.montant}' type='button' value='${billet20.montant}€'></span>`;
+        //     }
+        // }
+        // // rendu billets 10
+        // while ( aRendre > 10  && (this.fondCaisse.stock.find(s => s.montant === 10)) != undefined )
+        // {
+        //     let billet10 = this.fondCaisse.stock.find(s => s.montant === 10)
+        //     if ( billet10 != undefined){
+        //         //billet 10 dispo
+        //         this.transfert_fond_caisse_vers_retour_monnaie(this.fondCaisse.stock, this.retourMonnaie.stock, billet10);
+        //         aRendre-=10;
+        //         //Ajout affichage.
+        //         this.aRendreAffichage.innerHTML += `<span><input class='button ${billet10.type} ${billet10.type}${billet10.montant}' type='button' value='${billet10.montant}€'></span>`;
+        //     }
+        // }
+        // // rendu billets 5
+        // while ( aRendre > 5   && (this.fondCaisse.stock.find(s => s.montant === 5)) != undefined )
+        // {
+        //     let billet5 = this.fondCaisse.stock.find(s => s.montant === 5)
+        //     if ( billet5 != undefined){
+        //         //billet 5 dispo
+        //         this.transfert_fond_caisse_vers_retour_monnaie(this.fondCaisse.stock, this.retourMonnaie.stock, billet5);
+        //         aRendre-=5;
+        //         //Ajout affichage.
+        //         this.aRendreAffichage.innerHTML += `<span><input class='button ${billet5.type} ${billet5.type}${billet5.montant}' type='button' value='${billet5.montant}€'></span>`;
+        //     }
+        // }
+        // // rendu piece 2
+        // while ( aRendre > 2   && (this.fondCaisse.stock.find(s => s.montant === 2)) != undefined )
+        // {
+        //     let piece2 = this.fondCaisse.stock.find(s => s.montant === 2)
+        //     if ( piece2 != undefined){
+        //         //piece2  dispo
+        //         this.transfert_fond_caisse_vers_retour_monnaie(this.fondCaisse.stock, this.retourMonnaie.stock, piece2);
+        //         aRendre-=2;
+        //         //Ajout affichage.
+        //         this.aRendreAffichage.innerHTML += `<span><input class='button ${piece2.type} ${piece2.type}${piece2.montant}e' type='button' value='${piece2.montant}€'></span>`;
+        //     }
+        // }
+        // // rendu piece 1
+        // while ( aRendre > 1   && (this.fondCaisse.stock.find(s => s.montant === 1)) != undefined )
+        // {
+        //     let piece1 = this.fondCaisse.stock.find(s => s.montant === 1)
+        //     if ( piece1 != undefined){
+        //         //piece1  dispo
+        //         this.transfert_fond_caisse_vers_retour_monnaie(this.fondCaisse.stock, this.retourMonnaie.stock, piece1);
+        //         aRendre-=1;
+        //         //Ajout affichage.
+        //         this.aRendreAffichage.innerHTML += `<span><input class='button ${piece1.type} ${piece1.type}${piece1.montant}e' type='button' value='${piece1.montant}€'></span>`;
+        //     }
+        // }
+        // // rendu piece 50
+        // while ( aRendre > 0.5   && (this.fondCaisse.stock.find(s => s.montant === 0.50)) != undefined )
+        // {
+        //     let piece50 = this.fondCaisse.stock.find(s => s.montant === 0.50)
+        //     if ( piece50 != undefined){
+        //         //piece50  dispo
+        //         this.transfert_fond_caisse_vers_retour_monnaie(this.fondCaisse.stock, this.retourMonnaie.stock, piece50);
+        //         aRendre-=0.5;
+        //         //Ajout affichage.
+        //         this.aRendreAffichage.innerHTML += `<span><input class='button ${piece50.type} piece50c' type='button' value='50c'></span>`;
+        //     }
+        // }
+        // // rendu piece 20
+        // while ( aRendre > 0.20   && (this.fondCaisse.stock.find(s => s.montant === 0.20)) != undefined )
+        // {
+        //     let piece20 = this.fondCaisse.stock.find(s => s.montant === 0.20)
+        //     if ( piece20 != undefined){
+        //         //piece20  dispo
+        //         this.transfert_fond_caisse_vers_retour_monnaie(this.fondCaisse.stock, this.retourMonnaie.stock, piece20);
+        //         aRendre-=0.20;
+        //         //Ajout affichage.
+        //         this.aRendreAffichage.innerHTML += `<span><input class='button ${piece20.type} piece20c' type='button' value='20c'></span>`;
+        //     }
+        // }
+        // // rendu piece 10
+        // while ( aRendre > 0.10   && (this.fondCaisse.stock.find(s => s.montant === 0.10)) != undefined )
+        // {
+        //     let piece10 = this.fondCaisse.stock.find(s => s.montant === 0.10)
+        //     if ( piece10 != undefined){
+        //         //piece10  dispo
+        //         this.transfert_fond_caisse_vers_retour_monnaie(this.fondCaisse.stock, this.retourMonnaie.stock, piece10);
+        //         aRendre-=0.10;
+        //         //Ajout affichage.
+        //         this.aRendreAffichage.innerHTML += `<span><input class='button ${piece10.type} piece10c' type='button' value='10c'></span>`;
+        //     }
+        // }
+        // // rendu piece 5
+        // while ( aRendre > 0.05   && (this.fondCaisse.stock.find(s => s.montant === 0.05)) != undefined )
+        // {
+        //     let piece5 = this.fondCaisse.stock.find(s => s.montant === 0.05)
+        //     if ( piece5 != undefined){
+        //         //piece5  dispo
+        //         this.transfert_fond_caisse_vers_retour_monnaie(this.fondCaisse.stock, this.retourMonnaie.stock, piece5);
+        //         aRendre-=0.05;
+        //         //Ajout affichage.
+        //         this.aRendreAffichage.innerHTML += `<span><input class='button ${piece5.type} piece5c' type='button' value='5c'></span>`;
+        //     }
+        // }
+        // // rendu piece 2
+        // while ( aRendre > 0.02   && (this.fondCaisse.stock.find(s => s.montant === 0.02)) != undefined )
+        // {
+        //     let piece2 = this.fondCaisse.stock.find(s => s.montant === 0.02)
+        //     if ( piece2 != undefined){
+        //         //piece5  dispo
+        //         this.transfert_fond_caisse_vers_retour_monnaie(this.fondCaisse.stock, this.retourMonnaie.stock, piece2);
+        //         aRendre-=0.02;
+        //         //Ajout affichage.
+        //         this.aRendreAffichage.innerHTML += `<span><input class='button ${piece2.type} piece2c' type='button' value='2c'></span>`;
+        //     }
+        // }
+        // // rendu piece 1
+        // while ( aRendre > 0.01   && (this.fondCaisse.stock.find(s => s.montant === 0.01)) != undefined )
+        // {
+        //     let piece1 = this.fondCaisse.stock.find(s => s.montant === 0.01)
+        //     if ( piece1 != undefined){
+        //         //piece5  dispo
+        //         this.transfert_fond_caisse_vers_retour_monnaie(this.fondCaisse.stock, this.retourMonnaie.stock, piece1);
+        //         aRendre-=0.01;
+        //         //Ajout affichage.
+        //         this.aRendreAffichage.innerHTML += `<span><input class='button ${piece1.type} piece1c' type='button' value='1c'></span>`;                
+        //     }
+        // }
 
 
         // console.log("combien de billet 50?");
