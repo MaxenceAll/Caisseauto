@@ -12,89 +12,61 @@ export class Caisse{
         this.nombre_article = 0;
         this.restantapayer = 0;
         this.aRendre = 0;
-    
-        this.tab_articles = document.getElementById("tab_articles");
 
+        // AFFICHAGE SUPERIEUR :
+        // pointer vers affichage du nombre ( Reste à payer : )
         this.restantapayerLabel = document.getElementById("restantapayer");
-        this.nombre_articleLabel = document.getElementById("nombre_article");
-
-        this.total_articleLabel = document.getElementById("total_article");
-        this.aRendreLabel = document.getElementById("aRendre");
-        
+        // pointer vers affichage du fond de caisse ( Fond de caisse = )
         this.fond_caisseLabel = document.getElementById("fond_caisse");
-
         //pointer Reste à Payer : / Reste à Rendre :
         this.ResteALabel = document.getElementById("ResteA");
-
-        //pointer retour monnaie (affichage)
+        
+        // AFFICHAGE retour monnaie :
+        // pointer vers le montant a rendre ( - à rendre = X )
+        this.aRendreLabel = document.getElementById("aRendre");
+        //pointer retour monnaie (affichage visuel)
         this.aRendreAffichage = document.getElementById("aRendreAffichage");
-
+        
+        // TICKET CAISSE :
+        // pointer vers liste des articles pour ajouter à la suite.
+        this.tab_articles = document.getElementById("tab_articles");
+        // pointer vers affichage du nombre article ( nombre article = x )
+        this.nombre_articleLabel = document.getElementById("nombre_article");
+        // pointer vers affichage des différents article <p> ... 
+        this.total_articleLabel = document.getElementById("total_article");
     }
 
-    initCaisse(){
-        // 4 billets de 50
-        for (let i = 0 ; i < 4 ; i++){
-            let newBillet50 = new Monnaie("50€",50,"billet");
-            this.fondCaisse.stock.push(newBillet50);
+    initCaisse()
+    {
+        // un tab pour aller chercher les infos à ajouter 
+        const denominations = [
+            {nom: "50€", montant: 50, type: "billet", combien: 4},
+            {nom: "20€", montant: 20, type: "billet", combien: 5},
+            {nom: "10€", montant: 10, type: "billet", combien: 6},
+            {nom: "5€", montant: 5, type: "billet", combien: 7},
+            {nom: "2€", montant: 2, type: "piece", combien: 8},
+            {nom: "1€", montant: 1, type: "piece", combien: 9},
+            {nom: "50c", montant: 0.50, type: "piece", combien: 10},
+            {nom: "20c", montant: 0.20, type: "piece", combien: 11},
+            {nom: "5c", montant: 0.05, type: "piece", combien: 12},
+            {nom: "1c", montant: 0.01, type: "piece", combien: 13}
+        ];
+        // sortir le montant total en fond de caisse
+        let montant_fond_caisse = 0;
+        // double boucle 1: passer pour chaque element de denomination 2: new Monnaie en fonction des données dans le dénomination en cours
+        for (const denomination of denominations) {
+            for (let i = 0; i < denomination.combien; i++)
+            {
+                const newMonnaie = new Monnaie(denomination.nom, denomination.montant, denomination.type);
+                this.fondCaisse.stock.push(newMonnaie);
+                montant_fond_caisse += denomination.montant;
+            }
         }
-        // 5 billets de 20
-        for (let i = 0 ; i < 5 ; i++){
-            let newBillet20 = new Monnaie("20€",20,"billet");
-            this.fondCaisse.stock.push(newBillet20);
-        } 
-        // 6 billets de 10
-        for (let i = 0 ; i < 6 ; i++){
-            let newBillet10 = new Monnaie("10€",10,"billet");
-            this.fondCaisse.stock.push(newBillet10);
-        }
-        // 7 billets de 5
-        for (let i = 0 ; i < 7 ; i++){
-            let newBillet5 = new Monnaie("5€",5,"billet");
-            this.fondCaisse.stock.push(newBillet5);
-        }      
-        // 8 pieces de 2
-        for (let i = 0 ; i < 8 ; i++){
-            let newPiece2 = new Monnaie("2€",2,"piece");
-            this.fondCaisse.stock.push(newPiece2);
-        }    
-        // 9 pieces de 1
-        for (let i = 0 ; i < 9 ; i++){
-            let newPiece1 = new Monnaie("1€",1,"piece");
-            this.fondCaisse.stock.push(newPiece1);
-        }
-        // 10 pieces de 0.50
-        for (let i = 0 ; i < 10 ; i++){
-            let newPiece50 = new Monnaie("50c",0.50,"piece");
-            this.fondCaisse.stock.push(newPiece50);
-        }  
-        // 11 pieces de 0.20
-        for (let i = 0 ; i < 11 ; i++){
-            let newPiece20 = new Monnaie("20c",0.20,"piece");
-            this.fondCaisse.stock.push(newPiece20);
-        }  
-        // 12 pieces de 0.50
-        for (let i = 0 ; i < 12 ; i++){
-            let newPiece05 = new Monnaie("5c",0.05,"piece");
-            this.fondCaisse.stock.push(newPiece05);
-        }  
-        // 13 pieces de 0.01
-        for (let i = 0 ; i < 13 ; i++){
-            let newPiece01 = new Monnaie("1c",0.01,"piece");
-            this.fondCaisse.stock.push(newPiece01);
-        }
-
-        this.fond_caisseLabel.innerText = this.fondCaisse.compterStock();
-
+        // affichage
+        this.fond_caisseLabel.innerText = montant_fond_caisse.toFixed(2);
     }
 
     scanArticle = (event) => {
-        console.log("scanArticle");
-        /* Probabilité sur le prix :
-         * [1c .. 1€[ -> 20%
-         * [1€ .. 5€[ -> 40%
-         * [5€ .. 10€[ -> 30%
-         * [10€ .. 50€[ -> 10%
-         */
         let aleatoire = this.getRandomNumber(0, 100);
         let price = 0;
         if(aleatoire < 10){
@@ -115,12 +87,9 @@ export class Caisse{
         this.restantapayerLabel.innerText = this.restantapayer.toFixed(2);
         this.nombre_articleLabel.innerText = ++this.nombre_article;
         this.total_articleLabel.innerText = this.restantapayer.toFixed(2);
-      }
-
-      
+      }      
 
     fairePaiement(){
-
         if (this.entreeMonnaie.compterStock() < this.restantapayer )
         {
             // alert("il faut plus");
@@ -131,16 +100,11 @@ export class Caisse{
             this.restantapayerLabel.classList.add("rouge","blink_me");
 
             //vider montant inséré vers fond caisse
-            // for (let i = 0 ; i < this.entreeMonnaie.stock.length + 1 ; i++){
-            //     this.fondCaisse.stock.push(this.entreeMonnaie.stock[i]);
-            //     this.entreeMonnaie.stock.shift();
-            // }
             if(this.entreeMonnaie.stock.length){
                 for (let i = 0 ; i < this.entreeMonnaie.stock.length ; i++){
                     this.fondCaisse.stock.push(this.entreeMonnaie.stock.pop());
                 }
             }
-
             //déduire reste à payer
             this.restantapayer -= this.entreeMonnaie.montant_total.innerText;
             this.restantapayerLabel.innerText = this.restantapayer.toFixed(2);
@@ -231,6 +195,4 @@ export class Caisse{
     getRandomNumber = (min, max, precision = 0) => {
         return +(Math.random() * (max - min) + min).toFixed(precision);
     }
-
-
 } 
