@@ -8,7 +8,6 @@ export class Wallet{
         this.stock = new Array;
 
         this.montant_total = document.getElementById("montant_total");
-
         this.tab_articles = document.getElementById("tab_articles");
     }
 

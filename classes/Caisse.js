@@ -36,6 +36,7 @@ export class Caisse{
         this.total_articleLabel = document.getElementById("total_article");
     }
 
+    // Remplir le fond de caisse de monnaie:
     initCaisse()
     {
         // un tab pour aller chercher les infos à ajouter 
@@ -89,98 +90,87 @@ export class Caisse{
         this.total_articleLabel.innerText = this.restantapayer.toFixed(2);
       }      
 
-    fairePaiement(){
+    fairePaiement()
+    {
+        // Si pas assez d'argent inséré
         if (this.entreeMonnaie.compterStock() < this.restantapayer )
         {
-            // alert("il faut plus");
-            //changer le texte resteA :
-            this.ResteALabel.innerText = "Reste à payer :";
-            this.ResteALabel.classList.add("rouge","blink_me");
-            // passerResteAPayerEnRouge();
-            this.restantapayerLabel.classList.add("rouge","blink_me");
-
-            //vider montant inséré vers fond caisse
-            if(this.entreeMonnaie.stock.length){
-                for (let i = 0 ; i < this.entreeMonnaie.stock.length ; i++){
-                    this.fondCaisse.stock.push(this.entreeMonnaie.stock.pop());
-                }
-            }
-            //déduire reste à payer
-            this.restantapayer -= this.entreeMonnaie.montant_total.innerText;
-            this.restantapayerLabel.innerText = this.restantapayer.toFixed(2);
-            //maj montant inséré
-            this.entreeMonnaie.montant_total.innerText = this.entreeMonnaie.compterStock();
-            this.fond_caisseLabel.innerText = this.fondCaisse.compterStock();
+            this.passerResteAPayerEnRouge();
+            this.transfert_entreeMonnaie_vers_fond_caisse();
+            this.updateFondCaisse();
         }
+        // Si assez d'argent inséré
         else
         {
-            if (this.entreeMonnaie.compterStock() == this.restantapayer)
-            {
-                alert("Transaction terminée.");
-                //impression ticket de caisse.
-            }
-            else
-            {
-                //changer le texte resteA :
-                this.ResteALabel.innerText = "Reste à rendre :";
-                this.ResteALabel.classList.add("vert", "blink_me");
+            this.passerResteAPayerEnVert();
+            this.transfert_entreeMonnaie_vers_fond_caisse();
+            this.updateFondCaisse();
 
-                // passerResteAPayerEnVert();
-                this.restantapayerLabel.classList.add("vert","blink_me");
-                //vider montant inséré vers fond caisse
-                if(this.entreeMonnaie.stock.length){
-                    for (let i = 0 ; i < this.entreeMonnaie.stock.length ; i++){
-                        this.fondCaisse.stock.push(this.entreeMonnaie.stock.pop());
-                    }
-                }                
-                //déduire reste à payer
-                this.restantapayer -= this.entreeMonnaie.montant_total.innerText;
-                this.restantapayerLabel.innerText = this.restantapayer.toFixed(2);
-                //maj montant inséré
-                this.entreeMonnaie.montant_total.innerText = this.entreeMonnaie.compterStock();
-                // maj du fond de caisse
-                this.fond_caisseLabel.innerText = parseFloat(this.fondCaisse.compterStock());
+            // Changement affichage à rendre :
+            this.aRendreLabel.innerText = this.restantapayer.toFixed(2);
+            this.aRendre = (this.restantapayer.toFixed(2));
+            // maj attribut caisse.aRendre
+            this.aRendre = Math.abs(this.aRendre);
 
-
-                // alert("Trop percu, retour monnaie nécessaire");
-                this.aRendreLabel.innerText = this.restantapayer.toFixed(2);
-                this.aRendre = (this.restantapayer.toFixed(2));
-
-                this.aRendre = Math.abs(this.aRendre);
-                
-                // Ajout sur ticket caisse :
-                this.tab_articles.innerHTML += "<p>$$ A rendre: "+this.aRendre+" €</p>";
-                console.log("A rendre =");
-                console.log(this.aRendre);
-
-
-                const currencyValues = [50, 20, 10, 5, 2, 1, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01];
-                const currencyTypes = ["billet50", "billet20", "billet10", "billet5", "piece2e", "piece1e", "piece50c", "piece20c", "piece10c", "piece5c", "piece2c", "piece1c"];
-                let change = {};
-
-                for (let i = 0; i < currencyValues.length; i++)
-                {
-                    while (this.aRendre >= currencyValues[i]) 
-                        {
-                            this.aRendre -= currencyValues[i];
-                            this.aRendre = this.aRendre.toFixed(2);
-                            if (change[currencyTypes[i]])
-                            {
-                                change[currencyTypes[i]]++;
-                            } else
-                            {
-                                change[currencyTypes[i]] = 1;
-                            }
-                            this.aRendreAffichage.innerHTML += `<span><input class='button ${currencyTypes[i]}' type='button' value='${currencyValues[i]}€'></span>`;
-                        }
-                }
-            }
+            // Ajout sur ticket caisse :
+            this.tab_articles.innerHTML += "<p>$$ A rendre: "+this.aRendre+" €</p>";
+            this.calculerRenduMonnaie();
         }
     }
 
+    passerResteAPayerEnRouge(){
+        this.ResteALabel.innerText = "Reste à payer :";
+        this.ResteALabel.classList.add("rouge","blink_me");
+        this.restantapayerLabel.classList.add("rouge","blink_me");
+    }
+    passerResteAPayerEnVert(){
+        this.ResteALabel.innerText = "Reste à rendre :";
+        this.ResteALabel.classList.add("vert", "blink_me");
+        this.restantapayerLabel.classList.add("vert","blink_me");
+    }
+
+    transfert_entreeMonnaie_vers_fond_caisse(){
+        if(this.entreeMonnaie.stock.length){
+            for (let i = 0 ; i < this.entreeMonnaie.stock.length ; i++)
+            {
+                this.fondCaisse.stock.push(this.entreeMonnaie.stock.pop());
+            }
+        }
+        //changement affichage.
+        this.restantapayer -= this.entreeMonnaie.montant_total.innerText;
+        this.restantapayerLabel.innerText = this.restantapayer.toFixed(2);
+        // changement affichage montant inséré
+        this.entreeMonnaie.montant_total.innerText = this.entreeMonnaie.compterStock();
+    }
+
+    updateFondCaisse(){
+        // maj du fond de caisse
+        this.fond_caisseLabel.innerText = parseFloat(this.fondCaisse.compterStock());
+    }
 
     calculerRenduMonnaie(){        
+        const currencyValues = [50, 20, 10, 5, 2, 1, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01];
+        const currencyTypes = ["billet50", "billet20", "billet10", "billet5", "piece2e",
+             "piece1e", "piece50c", "piece20c", "piece10c", "piece5c", "piece2c", "piece1c"];
 
+        let change = {};
+
+        for (let i = 0; i < currencyValues.length; i++)
+        {
+            while (this.aRendre >= currencyValues[i]) 
+                {
+                    this.aRendre -= currencyValues[i];
+                    this.aRendre = this.aRendre.toFixed(2);
+                    if (change[currencyTypes[i]])
+                    {
+                        change[currencyTypes[i]]++;
+                    } else
+                    {
+                        change[currencyTypes[i]] = 1;
+                    }
+                    this.aRendreAffichage.innerHTML += `<span><input class='button ${currencyTypes[i]}' type='button' value='${currencyValues[i]}€'></span>`;
+                }
+        }
     }
 
 
