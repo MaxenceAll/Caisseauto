@@ -22,13 +22,10 @@ document.querySelectorAll(".argent").forEach(function(element){
             type = "piece";
             name = montant+"c"
         }
-        // console.log("Ajout de :");
-        // console.log(montant);
-        // console.log(name);
-        // console.log(type);
         maCaisse.entreeMonnaie.ajouterMonnaie(new Monnaie(name,parseFloat(montant),type));
     });
 });
+
 // listener bouton Payer 
 let btn_payer = document.getElementById("btn_payer");
 btn_payer.addEventListener("click", function (){
@@ -36,20 +33,20 @@ btn_payer.addEventListener("click", function (){
 }
 )
 
-const btn_test = document.getElementById("btn_test");
-btn_test.addEventListener("click", function (){
-        getLog();
-        console.log(maCaisse.restantapayer);
-    }
-)
 
-
-function getLog(){    
-    console.log("Fond Caisse :");
-    console.log(maCaisse.fondCaisse);
-    console.log("Entrée Monnaie :");
-    console.log(maCaisse.entreeMonnaie);
-    console.log("Retour Monnaie :");
-    console.log(maCaisse.retourMonnaie);
-}
+// // btn test pour afficher contenu des wallets
+// const btn_test = document.getElementById("btn_test");
+// btn_test.addEventListener("click", function (){
+//         getLog();
+//         console.log(maCaisse.restantapayer);
+//     }
+// )
+// function getLog(){    
+//     console.log("Fond Caisse :");
+//     console.log(maCaisse.fondCaisse);
+//     console.log("Entrée Monnaie :");
+//     console.log(maCaisse.entreeMonnaie);
+//     console.log("Retour Monnaie :");
+//     console.log(maCaisse.retourMonnaie);
+// }
 

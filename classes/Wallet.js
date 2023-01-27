@@ -13,20 +13,10 @@ export class Wallet{
 
     ajouterMonnaie(montant){
         this.stock.push(montant);
-        // console.log("stock (aka montant inséré)");
-        // console.log(this.compterStock());
         this.montant_total.innerText = this.compterStock();
         this.tab_articles.innerHTML += "<p>++ Vous avez inséré "+montant.montant+" € ("+montant.type+")</p>";
     }
-
-    debiterMonnaie(){
-
-    }
-
-    compterMonnaie(name){
-
-    }
-
+    
     compterStock(){
         let total = 0;
         if (this.stock.length != 0){

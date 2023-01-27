@@ -3,6 +3,8 @@ html , body{
     margin: 0px;
     color: black;
     font-family: 'Monofett', cursive;
+    height: 100%;
+    width: 100%;
 }
 
 hr{
@@ -37,10 +39,6 @@ hr{
     border-radius: 10%;
 }
 
-/* .affichage_montant_total{
-    border-bottom: 3px solid rgb(3, 3, 3);
-} */
-
 .affichage_fond_caisse{
     font-size: 1.2rem;
 }
@@ -54,20 +52,23 @@ hr{
     align-items: center;
     text-align: center;
     width: 100%;
+    flex-wrap: wrap;
 }
 .boutons input{
     margin: 5px;
+    width: 30vw;
+    height: 10vw;
 }
 
 #btn_scan{
     border-radius: 10%;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-size: 2rem;
+    font-size: 3vw;
     color: white;
     background-color: green;
 }
 #btn_scan:hover{    
-    font-size: 2rem;
+    font-size: 3vw;
     color: green;
     background-color: white;
     cursor: pointer;
@@ -75,12 +76,12 @@ hr{
 #btn_payer{
     border-radius: 10%;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-size: 2rem;
+    font-size: 3vw;
     color: white;
     background-color: blue;
 }
 #btn_payer:hover{
-    font-size: 2rem;
+    font-size: 3vw;
     color: blue;
     background-color: white;
     cursor: pointer;
@@ -139,23 +140,27 @@ hr{
 /* Affichage des monnaies : */
  .billet50{
     background-color: violet;
-    font-size: 3.5vw;
     width: 4rem;
+    height: 2.5rem;
+    font-size: 1.5rem;
 }
  .billet20{
     background-color: lightblue;
-    font-size: 3.5vw;
     width: 4rem;
+    height: 2.5rem;
+    font-size: 1.5rem;
 }
  .billet10{
     background-color: burlywood;
-    font-size: 3.5vw;
     width:4rem;
+    height: 2.5rem;
+    font-size: 1.5rem;
 }
  .billet5{
     background-color: greenyellow;
-    font-size: 3.5vw;
     width: 4rem;
+    height: 2.5rem;
+    font-size: 1.5rem;
 }
  .piece02{
     border-radius: 50%;  
@@ -235,6 +240,17 @@ hr{
     width: auto;
 }
 
+
+
+
+.retour_monnaie{
+    padding-left: 5%;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
 .label_retour_monnaie{
     text-decoration: underline;
     font-size: 3.5vw;
@@ -277,8 +293,6 @@ hr{
   }
 
 
-
-
 .animated{
     animation: toto 1s linear;
     position: relative;
@@ -291,9 +305,6 @@ hr{
   }
 
 
-
-
-
 footer{
     display: flex;
     flex-direction: column;
@@ -303,5 +314,5 @@ footer{
     width: 100%;
     height: 50px;
     background-color: grey;
-    font-size: 2rem;
+    font-size: 3vw;
 }
